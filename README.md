@@ -22,16 +22,57 @@ In conclusion, the use of sign language in social robots promotes accessibility,
 
 ### Dataset
 
-Link dataset e breve descrizione (+ immagine ?)
+For this project the original dataset is the [Sign Language MNIST Dataset](https://www.kaggle.com/datasets/datamunge/sign-language-mnist). 
+
+The dataset format consists of a training set and a test set represented by a label (0-25) as a one-to-one map for each alphabetic letter A-Z. Due to the gesture movements to make the letter J (9) and Z (25), no instances of these two are present in the datasets.
+
+The training data (27455 cases) and test data (7172 cases) are about half the size of the standard MNIST but otherwise similar with a label header row, pixel1,pixel2….pixel784 representing a single image of 28x28 pixels with grayscale values between 0-255.
+
+![image_sign_dataset](docs/amer_sign2.png "amer_sign2")
+
+For more information please refer to the dataset link above.
 
 ### Subdataset
 
-descrizione nella generazione del subdataset
+<!-- descrizione nella generazione del subdataset -->
+In order to have a better dataset for applying machine learning algorithms of classification, the original dataset was reduced into a smaller one, regarding both the training and the test set. To this aim, a specific number of samples for each of the 24 classes were extracted from the original database. This allowed to obtain a balanced subdataset, since every class presents the same amount of samples, and at the same time, to maintain an acceptable proportion between the training and test set size (about 80% for training and 20% for testing). More in detail two different sizes were tested, a first one containing 7200 images in the training set (300 per class) and 1824 in the test set (76 per class), and a second bigger one having 12000 images for training (500 per class) and 2400 for testing (100 per class). Such dimensions reduced the computational complexity of the problem, decreasing the time required by the learning phase while maintaining acceptable results in terms of performances. 
 
-Setup Environment
---------------------
+Moreover, due to how they were obtained, the subsets are initially "ordered", in the sense that the classes appear sequentially following the alphabetical order, (i.e. there are 500 images of 'A' followed by 500 'B' and so on...), therefore in order to have a more general set, they were then randomized in a separate block of code.
 
-Spiegare dove collocare il dataset ed dire di modificare il path
+
+
+
+Setup Environment and How to Run
+-----------------------------------
+
+This project is based on the MNIST Sign Language. First, download the dataset from the following link:
+* [Sign Language MNIST Dataset](https://www.kaggle.com/datasets/datamunge/sign-language-mnist)
+
+After, unzip the downloaded package. Inside, the folders and files of interest are:
+- sign_mnist_test/
+    - sign_mnist_test.csv
+- sign_mnist_train/
+    - sign_mnist_train.csv
+
+For the execution of the Jupyter Notebook code use [Google Colab](https://colab.research.google.com/), a platform that allows to execute the code directly on the Cloud.
+
+To take advantage of the features of this platform, all you need is a Google account, through which you can log in and access to the project file.
+
+In your Google Drive account create a new folder (e.g. "VariousDatasets" named). Inside this, move (or copy) the folders with the related `.csv ` files previously listed of the original dataset.
+
+Once this is done open the `ML_project.ipynb` file with Google Colab.
+
+Run the first cell to mount your personal google drive.
+
+In cell 4, change the `path` variable to the path relative to the position of the copied datasets on your drive, example:
+
+```bash
+path = '/content/drive/MyDrive/.../VariousDatasets/'
+```
+
+Once these steps have been followed, it is possible to execute the other cells with in order to obtain the results with the different classification models.
+
+
 
 Classification Models
 -----------------
@@ -55,13 +96,40 @@ Desrizione Random Forest
 Results
 ------------------------------
 
-Tabella con nt=300 e confronti valori accuratezza e tempi
+All the previously described algorithms were tested twice using subsets of increasing size, in order to evaluate their performances to the varying of such factor. the models have been compared in terms of accuracy obtained and computational time required.
 
-Tabella con nt=500 e confronti valori accuratezza e tempi + confusion matrix dell'algoritmo ottimale
+As said in the "subdataset" section, the first subset was composed of 9024 images. Here the training set had 300 sample for each of the 24 classes, while the test set had 76.
+
+The following table shows the results obtained with the various algorithms using such subdataset. 
+
+![label_300](docs/label300.png "label300")
+
+     
+As you can see the best results in terms of accuracy were reached using a Support Vector Machine Classification with Gaussian kernel. In terms of time, instead, Random Forest method was significantly faster with respect to other solutions,  still presenting an acceptable accuracy in recognising images.
+ 
+        2) COMMENTO PIU APPROFONDITO del PERCHE' SI OTTENGONO QUESTE DIFFERENZE (Parlando della teoria)
+
+The following table, instead, shows the result obtained with a second subdataset composed of 14400 images.  Here the training set had 500 sample for each of the 24 classes, while the test set had 100.
+
+![label_500](docs/label500.png "label500")
+        
+
+Here again the best solution in terms of accuracy was found using the SVC algorithm with Gaussian kernel, even though Random Forest reached a similar result consuming much less time to execute the learning process.
+
+![conf_matrix](docs/svc_gaussian500.png "svc_gaussian500")
+
+As can be seen from the confusion matrix, most of the gestures and the predicted labels are identified and classified correctly, while there are some letters, such as K, R and U which have lower correspondence values with the learned (true) labels . This phenomenon is due to the fact that the gestures are very similar to each other and therefore the classification model can confuse them. The following image demonstrates the similarity:
+
+![confronto](docs/confronto.png "confronto")
+
+However, we can be satisfied with the 81.71% accuracy obtained with the SVC Gaussian kernel model. 
 
 
 System's features & Improvements
 ------------------
+
+per mostrare il motivo dei risultati con la lettera R e U e K--> possiamo dire che in teoria aumentare n di sample tra quelle confuse potrebbe essere soluzione ma non nel nostro caso trattandosi di immagini..per questo caso sarebbe meglio deep learning
+
 Vantaggi e limitazioni del sistema ML
 
 Improvements con deep learning 
