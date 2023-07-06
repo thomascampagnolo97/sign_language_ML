@@ -93,21 +93,15 @@ Once these steps have been followed, it is possible to execute the other cells w
 Classification Models
 -----------------
 
-Lista dei modelli di classificazione usati
+Three different models are used for the classification of sign language images, such as:
+* SVC (with both *linear* and *gaussian* kernel);
+* LinearSVC;
+* Random Forest.
 
-### SVC Model
+The SVC and LinearSVC models are obtained by a grid search over the regularizer parameter `C` and the `kernel` type for classification problems. 
 
-Descrizione SVC model con kernel lineare
+The estimator is chosen following the [scikit-learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html) guide.
 
-Descrizione SVC model con kernel gaussiano
-
-### LinearSVC
-
-Descrizione LinearSVC
-
-### Random Forest
-
-Desrizione Random Forest
 
 Results
 ------------------------------
@@ -122,8 +116,6 @@ The following table shows the results obtained with the various algorithms using
 
      
 As you can see the best results in terms of accuracy were reached using a Support Vector Machine Classification with Gaussian kernel. In terms of time, instead, Random Forest method was significantly faster with respect to other solutions,  still presenting an acceptable accuracy in recognising images.
- 
-        2) COMMENTO PIU APPROFONDITO del PERCHE' SI OTTENGONO QUESTE DIFFERENZE (Parlando della teoria)
 
 The following table, instead, shows the result obtained with a second subdataset composed of 14400 images.  Here the training set had 500 sample for each of the 24 classes, while the test set had 100.
 
@@ -131,6 +123,8 @@ The following table, instead, shows the result obtained with a second subdataset
         
 
 Here again the best solution in terms of accuracy was found using the SVC algorithm with Gaussian kernel, even though Random Forest reached a similar result consuming much less time to execute the learning process.
+
+    2) COMMENTO PIU APPROFONDITO del PERCHE' SI OTTENGONO QUESTE DIFFERENZE (Parlando della teoria) (differenza tra SVC kernel lineare e gaussiano, dire che random forest non ha bisogno di hyperparameters e qualcosa riguardo LinearSVC)
 
 There are several ways of comparing predictions with actual results, and they measure different aspects of a classification. One of the most classification metric is the confusion matrix and it tells when we need to know how much samples we got right or wrong for each class. The values that were correct and correctly predicted are called true positives, the ones that were predicted as positives but weren't positives are called false positives.
 
