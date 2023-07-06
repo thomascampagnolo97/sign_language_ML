@@ -7,6 +7,22 @@ Authors: Claudio Del Gaizo (s4696649), Thomas Campagnolo (s5343274)
 
 Professor: [Luca Oneto](luca.oneto@unige.it) 
 
+Contents
+----------------
+* [Introduction](#introduction)
+    * [Scenario Description](#scenario-description)
+    * [Dataset](#dataset)
+    * [Subdataset](#subdataset)
+* [Setup Environment and How to Run](#setup-environment-and-how-to-run)
+* [Classification Models](#classification-models)
+    * [SVC Model](#svc-model)
+    * [LinearSVC](#linearsvc)
+    * [Random Forest](#random-forest)
+* [Results](#results)
+* [System's features & Improvements](#systems-features--improvements)
+
+
+
 Introduction
 -----------------
 
@@ -118,7 +134,9 @@ Here again the best solution in terms of accuracy was found using the SVC algori
 
 ![conf_matrix](docs/svc_gaussian500.png "svc_gaussian500")
 
-As can be seen from the confusion matrix, most of the gestures and the predicted labels are identified and classified correctly, while there are some letters, such as K, R and U which have lower correspondence values with the learned (true) labels . This phenomenon is due to the fact that the gestures are very similar to each other and therefore the classification model can confuse them. The following image demonstrates the similarity:
+There are several ways of comparing predictions with actual results, and they measure different aspects of a classification. One of the most classification metric is the confusion matrix and it tells when we need to know how much samples we got right or wrong for each class. The values that were correct and correctly predicted are called true positives, the ones that were predicted as positives but weren't positives are called false positives.
+
+As can be seen from the confusion matrix, most of the gestures are predicted correctly, while there are some letters, such as K, R and U which have lower correspondence values with the learned (true) labels . This phenomenon is due to the fact that the gestures are very similar to each other and therefore the classification model can confuse them. The following image demonstrates the similarity:
 
 ![confronto](docs/confronto.png "confronto")
 
@@ -128,8 +146,21 @@ However, we can be satisfied with the 81.71% accuracy obtained with the SVC Gaus
 System's features & Improvements
 ------------------
 
-per mostrare il motivo dei risultati con la lettera R e U e K--> possiamo dire che in teoria aumentare n di sample tra quelle confuse potrebbe essere soluzione ma non nel nostro caso trattandosi di immagini..per questo caso sarebbe meglio deep learning
+Some advantages of using SVC, LinearSVC and Random Forest for Sign Language MNIST image classification are:
 
-Vantaggi e limitazioni del sistema ML
+- Generally good performance. These algorithms are known to perform well in classifying structured data, such as images.
+- Interpretability. Some machine learning algorithms provide a more direct and understandable explanation of the decisions made by the model, facilitating the interpretation of the results.
 
-Improvements con deep learning 
+However, there are some limitations in using these algorithms.
+
+- Manual feature engineering or feature extraction by the user. This process can be complex and require specific imaging expertise.
+- Sensitivity to data size and dimensionality. Some machine learning algorithms, such as SVC, can be computationally expensive and time-consuming to train on large datasets or high-dimensional data.
+
+Compared to traditional machine learning models, deep learning can offer advantages and improvements in sign language MNIST image classification such as:
+
+- Automatic extraction of relevant features from images with convolutional neural networks (CNN);
+- Robustness to variations. Convolutional neural networks are able to capture the variations and intricacies of finger gestures, making the model more robust to variations in lighting, hand position and other factors that can affect the image.
+
+In summary, while deep learning can offer significant advantages in sign language image classification, such as automatic feature extraction and superior performance, it also has some disadvantages, such as the need for large amounts of data, computational complexity, difficulty in interpretation and risk of overfitting. 
+
+Choosing between deep learning and traditional machine learning depends on the specific needs of the project, the resources available, and the complexity of the data to be classified.
