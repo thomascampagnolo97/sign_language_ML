@@ -132,9 +132,9 @@ The following table, instead, shows the result obtained with a second subdataset
 
 Here again the best solution in terms of accuracy was found using the SVC algorithm with Gaussian kernel, even though Random Forest reached a similar result consuming much less time to execute the learning process.
 
-![conf_matrix](docs/svc_gaussian500.png "svc_gaussian500")
-
 There are several ways of comparing predictions with actual results, and they measure different aspects of a classification. One of the most classification metric is the confusion matrix and it tells when we need to know how much samples we got right or wrong for each class. The values that were correct and correctly predicted are called true positives, the ones that were predicted as positives but weren't positives are called false positives.
+
+![conf_matrix](docs/svc_gaussian500.png "svc_gaussian500")
 
 As can be seen from the confusion matrix, most of the gestures are predicted correctly, while there are some letters, such as K, R and U which have lower correspondence values with the learned (true) labels . This phenomenon is due to the fact that the gestures are very similar to each other and therefore the classification model can confuse them. The following image demonstrates the similarity:
 
