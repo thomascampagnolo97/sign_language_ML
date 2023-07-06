@@ -15,9 +15,6 @@ Contents
     * [Subdataset](#subdataset)
 * [Setup Environment and How to Run](#setup-environment-and-how-to-run)
 * [Classification Models](#classification-models)
-    * [SVC Model](#svc-model)
-    * [LinearSVC](#linearsvc)
-    * [Random Forest](#random-forest)
 * [Results](#results)
 * [System's features & Improvements](#systems-features--improvements)
 
