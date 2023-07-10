@@ -33,6 +33,12 @@ Machine learning and classification techniques can be used to train social robot
 
 In conclusion, the use of sign language in social robots promotes accessibility, autonomy and the reduction of social isolation for people with hearing impairments, enabling them to participate more fully in society.
 
+### Motivations
+Although in natural applications, like images recognition, Deep Learning is more suggested, this project has the goal of understanding and comparing some Machine Learning estimators for image classification, in order to find (if existing) possible solutions capable of solving this specific problem. 
+
+Despite of the known limitations of ML algorithms in complex image recognition problems, the methods analyzed nonetheless present considerable results.
+
+
 ### Dataset
 
 For this project the original dataset is the [Sign Language MNIST Dataset](https://www.kaggle.com/datasets/datamunge/sign-language-mnist). 
@@ -51,6 +57,7 @@ For more information please refer to the dataset link above.
 In order to have a better dataset for applying machine learning algorithms of classification, the original dataset was reduced into a smaller one, regarding both the training and the test set. To this aim, a specific number of samples for each of the 24 classes were extracted from the original database. This allowed to obtain a balanced subdataset, since every class presents the same amount of samples, and at the same time, to maintain an acceptable proportion between the training and test set size (about 80% for training and 20% for testing). More in detail two different sizes were tested, a first one containing 7200 images in the training set (300 per class) and 1824 in the test set (76 per class), and a second bigger one having 12000 images for training (500 per class) and 2400 for testing (100 per class). Such dimensions reduced the computational complexity of the problem, decreasing the time required by the learning phase while maintaining acceptable results in terms of performances. 
 
 Moreover, due to how they were obtained, the subsets are initially "ordered", in the sense that the classes appear sequentially following the alphabetical order, (i.e. there are 500 images of 'A' followed by 500 'B' and so on...), therefore in order to have a more general set, they were then randomized in a separate block of code.
+
 
 
 
@@ -95,9 +102,9 @@ Three different models are used for the classification of sign language images, 
 * LinearSVC;
 * Random Forest.
 
-The SVC and LinearSVC models are obtained by a grid search over the regularizer parameter `C` and the `kernel` type for classification problems. 
+The SVC and LinearSVC models are obtained by a grid search over the different hyperparameters in order to find their optimal structure for this classification problem. 
 
-The estimator is chosen following the [scikit-learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html) guide.
+The estimators are chosen following the [scikit-learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html) guide.
 
 
 Results
@@ -112,7 +119,7 @@ The following table shows the results obtained with the various algorithms using
 ![label_300](docs/label300.png "label300")
 
      
-As you can see the best results in terms of accuracy were reached using a Support Vector Machine Classification with Gaussian kernel. In terms of time, instead, Random Forest method was significantly faster with respect to other solutions,  still presenting an acceptable accuracy in recognising images.
+As you can see the best results in terms of accuracy were reached using a Support Vector Machine Classification with Gaussian kernel. In terms of time, instead, Random Forest method was significantly faster with respect to other solutions,  still presenting a comparable accuracy in recognising images.
 
 The following table, instead, shows the result obtained with a second subdataset composed of 14400 images.  Here the training set had 500 sample for each of the 24 classes, while the test set had 100.
 
@@ -120,10 +127,11 @@ The following table, instead, shows the result obtained with a second subdataset
         
 
 Here again the best solution in terms of accuracy was found using the SVC algorithm with Gaussian kernel, even though Random Forest reached a similar result consuming much less time to execute the learning process.
+From comparing the computational times of the previous tables with each others we can see how it generally increase when using larger datasets. This allows to conclude that the complexity of the problem is quadratically proportional to the number of samples O(n^2).
 
-    2) COMMENTO PIU APPROFONDITO del PERCHE' SI OTTENGONO QUESTE DIFFERENZE (Parlando della teoria) (differenza tra SVC kernel lineare e gaussiano, dire che random forest non ha bisogno di hyperparameters e qualcosa riguardo LinearSVC)
+The main differences between SVC models and LinearSVC are related to the fact that they make use of different libraries for implementing SVM (respectively `libsvm` and `liblinear` ), and to the usage of a different multi-class classification strategy: One-Vs-One for SVC and One-Vs-Rest for LinearSVC. Instead, RandomForest Classifier doesn't need the process of GridSearch for the hyperparameters and for this reason, computationally speaking, it requires less times to fit the data.
 
-There are several ways of comparing predictions with actual results, and they measure different aspects of a classification. One of the most classification metric is the confusion matrix and it tells when we need to know how much samples we got right or wrong for each class. The values that were correct and correctly predicted are called true positives, the ones that were predicted as positives but weren't positives are called false positives.
+There are several ways of comparing predictions with actual results, and they measure different aspects of a classification. One of the most used classification metric is the confusion matrix.
 
 ![conf_matrix](docs/svc_gaussian500.png "svc_gaussian500")
 
@@ -137,10 +145,9 @@ However, we can be satisfied with the 81.71% accuracy obtained with the SVC Gaus
 System's features & Improvements
 ------------------
 
-Some advantages of using SVC, LinearSVC and Random Forest for Sign Language MNIST image classification are:
+The main advantage of using SVC, LinearSVC and Random Forest for Sign Language MNIST image classification is:
 
-- Generally good performance. These algorithms are known to perform well in classifying structured data, such as images.
-- Interpretability. Some machine learning algorithms provide a more direct and understandable explanation of the decisions made by the model, facilitating the interpretation of the results.
+- Generally good performance. These algorithms are known to perform well in classifying structured data.
 
 However, there are some limitations in using these algorithms.
 
@@ -152,6 +159,5 @@ Compared to traditional machine learning models, deep learning can offer advanta
 - Automatic extraction of relevant features from images with convolutional neural networks (CNN);
 - Robustness to variations. Convolutional neural networks are able to capture the variations and intricacies of finger gestures, making the model more robust to variations in lighting, hand position and other factors that can affect the image.
 
-In summary, while deep learning can offer significant advantages in sign language image classification, such as automatic feature extraction and superior performance, it also has some disadvantages, such as the need for large amounts of data, computational complexity, difficulty in interpretation and risk of overfitting. 
+But Deep learning has some disadvantages, such as the need for large amounts of data, computational complexity, difficulty in interpretation and risk of overfitting. 
 
-Choosing between deep learning and traditional machine learning depends on the specific needs of the project, the resources available, and the complexity of the data to be classified.
