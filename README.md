@@ -11,8 +11,9 @@ Contents
 ----------------
 * [Introduction](#introduction)
     * [Scenario Description](#scenario-description)
+    * [Motivations](#motivations)
     * [Dataset](#dataset)
-    * [Subdataset](#subdataset)
+    * [Custom Subdataset](#custom-subdataset)
 * [Setup Environment and How to Run](#setup-environment-and-how-to-run)
 * [Classification Models](#classification-models)
 * [Results](#results)
@@ -31,7 +32,7 @@ Unfortunately deaf-mute people often face challenges in social interaction due t
 
 Machine learning and classification techniques can be used to train social robots to recognize gestures and sign language expressions. This requires building annotated datasets containing images or videos of sign language gestures and training machine learning models to recognize them in real time.
 
-In conclusion, the use of sign language in social robots promotes accessibility, autonomy and the reduction of social isolation for people with hearing impairments, enabling them to participate more fully in society.
+The use of sign language in social robots promotes accessibility, autonomy and the reduction of social isolation for people with hearing impairments, enabling them to participate more fully in society.
 
 ### Motivations
 Although in natural applications, like images recognition, Deep Learning is more suggested, this project has the goal of understanding and comparing some Machine Learning estimators for image classification, in order to find (if existing) possible solutions capable of solving this specific problem. 
@@ -51,7 +52,7 @@ The training data (27455 cases) and test data (7172 cases) are about half the si
 
 For more information please refer to the dataset link above.
 
-### Subdataset
+### Custom Subdataset
 
 <!-- descrizione nella generazione del subdataset -->
 In order to have a better dataset for applying machine learning algorithms of classification, the original dataset was reduced into a smaller one, regarding both the training and the test set. To this aim, a specific number of samples for each of the 24 classes were extracted from the original database. This allowed to obtain a balanced subdataset, since every class presents the same amount of samples, and at the same time, to maintain an acceptable proportion between the training and test set size (about 80% for training and 20% for testing). More in detail two different sizes were tested, a first one containing 7200 images in the training set (300 per class) and 1824 in the test set (76 per class), and a second bigger one having 12000 images for training (500 per class) and 2400 for testing (100 per class). Such dimensions reduced the computational complexity of the problem, decreasing the time required by the learning phase while maintaining acceptable results in terms of performances. 
@@ -110,9 +111,9 @@ The estimators are chosen following the [scikit-learn](https://scikit-learn.org/
 Results
 ------------------------------
 
-All the previously described algorithms were tested twice using subsets of increasing size, in order to evaluate their performances to the varying of such factor. the models have been compared in terms of accuracy obtained and computational time required.
+All the previously described algorithms were tested twice using subsets of increasing size, in order to evaluate their performances to the varying of such factor. The models have been compared in terms of accuracy obtained and computational time required.
 
-As said in the "subdataset" section, the first subset was composed of 9024 images. Here the training set had 300 sample for each of the 24 classes, while the test set had 76.
+As said in the [Custom Subdataset](#custom-subdataset) section, the first subset was composed of 9024 images. Here the training set had 300 sample for each of the 24 classes, while the test set had 76.
 
 The following table shows the results obtained with the various algorithms using such subdataset. 
 
@@ -127,7 +128,7 @@ The following table, instead, shows the result obtained with a second subdataset
         
 
 Here again the best solution in terms of accuracy was found using the SVC algorithm with Gaussian kernel, even though Random Forest reached a similar result consuming much less time to execute the learning process.
-From comparing the computational times of the previous tables with each others we can see how it generally increase when using larger datasets. This allows to conclude that the complexity of the problem is quadratically proportional to the number of samples O(n^2).
+From comparing the computational times of the previous tables with each others we can see how it generally increase when using larger datasets. This allows to conclude that the complexity of the problem is quadratically proportional to the number of samples $O(n^2)$ for SVC while $O(nd)$ for Random Forest.
 
 The main differences between SVC models and LinearSVC are related to the fact that they make use of different libraries for implementing SVM (respectively `libsvm` and `liblinear` ), and to the usage of a different multi-class classification strategy: One-Vs-One for SVC and One-Vs-Rest for LinearSVC. Instead, RandomForest Classifier doesn't need the process of GridSearch for the hyperparameters and for this reason, computationally speaking, it requires less times to fit the data.
 
@@ -135,7 +136,7 @@ There are several ways of comparing predictions with actual results, and they me
 
 ![conf_matrix](docs/svc_gaussian500.png "svc_gaussian500")
 
-As can be seen from the confusion matrix, most of the gestures are predicted correctly, while there are some letters, such as K, R and U which have lower correspondence values with the learned (true) labels . This phenomenon is due to the fact that the gestures are very similar to each other and therefore the classification model can confuse them. The following image demonstrates the similarity:
+As it can be seen from this confusion matrix about the SVC Gaussian kernel, most of the gestures are predicted correctly, while there are some letters, such as K, R and U which have lower correspondence values with the learned (true) labels . This phenomenon is due to the fact that the gestures are very similar to each other and therefore the classification model can confuse them. The following image demonstrates the similarity:
 
 ![confronto](docs/confronto.png "confronto")
 
