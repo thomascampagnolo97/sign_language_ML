@@ -146,11 +146,11 @@ However, we can be satisfied with the 81.71% accuracy obtained with the SVC Gaus
 System's features & Improvements
 ------------------
 
-The main advantage of using SVC, LinearSVC and Random Forest for Sign Language MNIST image classification is:
+The main advantage of using SVC, LinearSVC and Random Forest for classification problems is:
 
 - Generally good performance. These algorithms are known to perform well in classifying structured data.
 
-However, there are some limitations in using these algorithms.
+However, there are some limitations in using these algorithms for complex image recognition, such as:
 
 - Manual feature engineering or feature extraction by the user. This process can be complex and require specific imaging expertise.
 - Sensitivity to data size and dimensionality. Some machine learning algorithms, such as SVC, can be computationally expensive and time-consuming to train on large datasets or high-dimensional data.
